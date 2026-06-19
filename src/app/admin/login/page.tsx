@@ -25,7 +25,10 @@ export default function AdminLoginPage() {
       if (!res.ok) throw new Error(data.error);
       showToast('Welcome, Admin', 'success');
       router.push('/admin/dashboard');
-    } catch (err: any) {
+    } catch (err: unknown) {
+  const message = err instanceof Error ? err.message : 'Login failed';
+  showToast(message, 'error');
+}
       showToast(err.message || 'Login failed', 'error');
     } finally {
       setLoading(false);

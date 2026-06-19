@@ -13,9 +13,9 @@ type FilterType = 'upcoming' | 'live' | 'recent' | 'all';
 
 export default function PredictionsPage() {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
-  const [matches, setMatches] = useState<any[]>([]);
-  const [predictions, setPredictions] = useState<any[]>([]);
+const [user, setUser] = useState<Record<string, unknown> | null>(null);
+const [matches, setMatches] = useState<Record<string, unknown>[]>([]);
+const [predictions, setPredictions] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterType>('upcoming');
   const [refreshing, setRefreshing] = useState(false);
@@ -79,7 +79,7 @@ export default function PredictionsPage() {
     setPredictions((prev) => [...prev, { ...data.prediction, match_id: matchId }]);
   }
 
-  const predByMatch: Record<string, any> = {};
+  const predByMatch: Record<string, Record<string, unknown>> = {};
   predictions.forEach((p) => { if (p.match_id) predByMatch[p.match_id] = p; });
 
   const FILTERS: { key: FilterType; label: string }[] = [
