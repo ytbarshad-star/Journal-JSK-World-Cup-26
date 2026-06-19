@@ -1,6 +1,6 @@
 'use client';
 // src/app/predictions/page.tsx
-const [predictions, setPredictions] = useState<any[]>([]);
+
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
@@ -13,9 +13,9 @@ type FilterType = 'upcoming' | 'live' | 'recent' | 'all';
 
 export default function PredictionsPage() {
   const router = useRouter();
-const [user, setUser] = useState<Record<string, unknown> | null>(null);
-const [matches, setMatches] = useState<Record<string, unknown>[]>([]);
-const [predictions, setPredictions] = useState<Record<string, unknown>[]>([]);
+  const [user, setUser] = useState<any>(null);
+  const [matches, setMatches] = useState<any[]>([]);
+  const [predictions, setPredictions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterType>('upcoming');
   const [refreshing, setRefreshing] = useState(false);
@@ -80,8 +80,8 @@ const [predictions, setPredictions] = useState<Record<string, unknown>[]>([]);
   }
 
   const predByMatch: Record<string, any> = {};
-predictions.forEach((p: any) => { if (p.match_id) predByMatch[p.match_id] = p; });
-  
+  predictions.forEach((p) => { if (p.match_id) predByMatch[p.match_id] = p; });
+
   const FILTERS: { key: FilterType; label: string }[] = [
     { key: 'upcoming', label: 'Next 24h' },
     { key: 'live', label: '🔴 Live' },
