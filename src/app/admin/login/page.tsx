@@ -12,25 +12,25 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-async function handleSubmit(e: React.FormEvent) {
-  e.preventDefault();
-  setLoading(true);
-  try {
-    const res = await fetch('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
-    showToast('Welcome, Admin', 'success');
-    router.push('/admin/dashboard');
-  } catch (err: any) {
-    showToast(err.message || 'Login failed', 'error');
-  } finally {
-    setLoading(false);
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      showToast('Welcome, Admin', 'success');
+      router.push('/admin/dashboard');
+    } catch (err: any) {
+      showToast(err.message || 'Login failed', 'error');
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
