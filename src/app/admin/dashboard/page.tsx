@@ -332,18 +332,20 @@ function MatchesTab() {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
 
-  useEffect(() => { loadMatches(); }, []);
+async function loadMatches() {
+  setLoading(true);
+  const res = await fetch('/api/admin/matches');
+  const data = await res.json();
+  setMatches(data.matches || []);
+  setLoading(false);
+}
 
-  async function loadMatches() {
-    setLoading(true);
-    const res = await fetch('/api/admin/matches');
-    const data = await res.json();
-    setMatches(data.matches || []);
-    setLoading(false);
-  }
+useEffect(() => { loadMatches(); }, []);
 
-  async function handleSync() {
-    setSyncing(true);
+async function handleSync() {
+  setSyncing(true);
+  ...
+}
     try {
       const res = await fetch('/api/admin/matches', {
         method: 'POST',
